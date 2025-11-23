@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="../css/AGV.css" />
+    <style>
+        
+
+        /* 搜索表单样式 */
+        .search-form {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 10px; /* 控件之间的间距 */
+            margin: 20px 0;
+        }
+        .search-form input[type="text"], .search-form select {
+            padding: 5px; /* 输入框内边距 */
+            width: 260px; /* 宽度 */
+        }
+        .search-form button {
+            padding: 5px 15px; /* 按钮内边距 */
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd; /* 边框 */
+            padding: 8px; /* 单元格内边距 */
+            text-align: center; /* 左对齐 */
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .avatar {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #b5b3b3; /* 灰色背景 */
+            color: white; /* 白色文字 */
+            text-align: center; /* 居中文本 */
+            padding: 10px 0; /* 上下内边距 */
+            margin-top: 30px;
+        }
+
+        #container {
+            width: 80%; /* 宽度为80% */
+            margin: 0 auto; /* 水平居中 */
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <!-- 顶部导航栏 -->
+        <div class="navbar">
+            <h1>AGV管理系统</h1>
+            <a href="#">退出登录</a>
+        </div>
+
+       {{searchForm}}
+
+        <!-- 搜索表单区域 -->
+        <form class="search-form" >
+            <label for="name">Name：</label>
+            <input type="text" id="name" name="name" placeholder="Enter Name" v-model="searchForm.name">
+
+            <label for="navType">NAV Type：</label>
+            <select id="navType" name="navType" v-model="searchForm.navType">
+                <option value=""></option>
+                <option value="1">QR</option>
+                <option value="2">SLAM</option>
+            </select>
+
+            <label for="type">Type：</label>
+            <select id="type" name="type" v-model="searchForm.type">
+                <option value=""></option>
+                <option value="1">600KG</option>
+                <option value="2">1000KG</option>
+            </select>
+
+            <button type="submit">Search</button>
+            <button type="reset">Clear</button>
+        </form>
+
+        <!-- 表格展示区 -->
+        <table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Name</th>
+                    <th>NAV Type</th>
+                    <th>Type</th>
+                    <th>image</th>
+                    <th>Status</th>
+                    <th>Create Time</th>
+                    <th>Update Time</th>
+                    <th>Operate</th>
+                </tr>
+            </thead>
+
+            <!-- 表格主体内容 -->
+            <tbody>
+                <!-- for(let i=0; i < agvList.Length; i++) -->
+                <tr v-for="(item, index) in agvList" :key="item.id">
+
+                    <td>{{index + 1}}</td>
+                    <td>{{item.name}}</td>
+                    <!-- <td>{{item.navType}}</td> -->
+                     <td>
+                        <span v-if="item.navType == 1">QR</span>
+                        <span v-else-if="item.navType == 2">SLAM</span>
+                        <span v-else>N/A</span>
+                     </td>
+                    
+                    <!-- <td>{{item.type}}</td> -->
+                     <td>
+                        <span v-show="item.type == 1">600KG</span>
+                        <span v-show="item.type == 2">1000KG</span>
+                     </td>
+                     <td><img :src="item.image"></td>
+                     <td>
+                        <span v-show="item.active==true" style="color: green;">启用</span>
+                        <span v-show="item.active==false" style="color: red;">禁用</span>
+                    </td>
+                    <td>{{item.entrydate}}</td>
+                    <td>{{item.updatetime}}</td>
+                    <td class="action-buttons">
+                        <button type="button">Edit</button>
+                        <button type="button">Delete</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <!-- 页脚版权区域 -->
+        <footer class="footer">
+            <p>Copyright © 2018-2025 AJautomation All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { createApp } from 
+        'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
+
+        createApp({
+            data(){
+                
+                return{
+                    searchForm:{
+                        name:'',
+                        naveType:'',
+                        type:''
+                    },
+                    agvList: [
+                                {
+                                    "id": 1,
+                                    "name": "1号",
+                                    "navType": 1,
+                                    "type": 1,
+                                    "image": "../img/AGV.png",
+                                    "active": true,
+                                    "entrydate": "2023-06-09",
+                                    "updatetime": "2024-09-30T14:59:38"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "2号",
+                                    "navType": 2,
+                                    "type": 3,
+                                    "image": "../img/AGV.png",
+                                    "active": true,
+                                    "entrydate": "2020-05-09",
+                                    "updatetime": "2024-09-01T00:00:00"
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "3号",
+                                    "navType": 3,
+                                    "type": 2,
+                                    "image": "../img/AGV.png",
+                                    "active": false,
+                                    "entrydate": "2021-06-01",
+                                    "updatetime": "2024-09-01T00:00:00"
+                                }
+                            ]
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
