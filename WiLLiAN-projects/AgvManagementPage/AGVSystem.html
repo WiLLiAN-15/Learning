@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>AGV管理画面</title>
+    <style>
+        .active {
+            color: green;
+        }
+
+        .inactive{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <header>
+            <h1 class="header-left">AGV管理システム</h1>
+            <a href="#" class="header-right">ログアウト</a>
+        </header>
+
+        {{searchForm}}
+        
+        <main>
+            <form class="filter-bar" action="/search" method="post">
+                <div class="box-with-label">
+                    <label for="name">Name:</label>
+                    <input id="name" class="input-box" type="password" placeholder="Enter Name" v-model="searchForm.name">
+                </div>
+
+                <div class="box-with-label">
+                    <label for="nav">NAV<br>Type:</label>
+                    <select class="select-box" id="nav" v-model="searchForm.navType">
+                        <option selected></option>
+                        <option value="1">SLAM</option>
+                        <option value="2">QR</option>
+                    </select>
+                </div>
+                
+                <div class="box-with-label">
+                    <label for="type">Type:</label>
+                    <select class="select-box" id="type" v-model="searchForm.type">
+                        <option selected></option>
+                        <option value="1">600Kg</option>
+                        <option value="2">1000Kg</option>
+                    </select>
+                </div>
+                
+                <button type="submit">Search</button>
+                <button type="reset">Clear</button>
+            </form>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>Name</th>
+                  <th>NAV Type</th>
+                  <th>Type</th>
+                  <th>Img</th>
+                  <th>Status</th>
+                  <th>Create Time</th>
+                  <th>Update Time</th>
+                  <th>Operate</th>
+                </tr>
+              </thead>
+                
+              <tbody>
+                <!-- for文の代わり -->
+                <tr v-for="(item, index) in agvList" :key="item.id">
+                  <td>{{index + 1}}</td>
+                  <td>{{item.name}}</td>
+                  <td>
+                    <span v-if="item.navType == 1">QR</span>
+                    <span v-else-if="item.navType == 2">SLAM</span>
+                    <span v-else>N/A</span>
+                  </td>
+                        
+                  <td>
+                    <span v-show="item.type == 1">600kg</span>
+                    <span v-show="item.type == 2">1000kg</span>
+                  </td>
+
+                  <td><img v-bind:src="item.image"></td>
+
+                  <td>
+                    <span :class="item.isActive ? 'active' : 'inactive'">
+                        {{ item.isActive ? '有効' : '無効' }}
+                    </span>
+                  </td>
+
+                  <td>{{item.entrydate}}</td>
+                  <td>{{item.updatetime}}</td>
+                  <td class="action-buttons">
+                    <button type="button" class="button-in-table">Edit</button>
+                    <button type="button" class="button-in-table">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </main>
+
+        <footer>
+            <div>Copyright &copy; 2025-2025 AichikikaiTechnoSystem All Rights Reserved.</div>
+        </footer>
+
+    </div>
+        
+    <script type="module">
+      import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
+            
+      createApp({
+			  data() {
+      	  return {
+						searchForm: {
+						name: "",
+						navType: "",
+						type: ""
+						},
+
+						agvList: [
+							{
+								"id": 1,
+								"name": "1号",
+								"navType": 1,
+								"type": 1,
+								"image": "img/QR600.png",
+								"entrydate": "2023-06-09",
+								"updatetime": "2024-09-30T14:59:38",
+								"isActive": true
+							},
+							{
+								"id": 2,
+								"name": "2号",
+								"navType": 2,
+								"type": 1,
+								"image": "img/QR600.png",
+								"entrydate": "2020-05-09",
+								"updatetime": "2024-09-01T00:00:00",
+								"isActive": true
+							},
+							{
+								"id": 3,
+								"name": "3号",
+								"navType": 1,
+								"type": 2,
+								"image": "img/QR600.png",
+								"entrydate": "2021-06-01",
+								"updatetime": "2024-09-01T00:00:00",
+								"isActive": false
+							}
+						]
+			}
+		}
+	}).mount("#app");
+	</script>
+	</body>
+	</html>
