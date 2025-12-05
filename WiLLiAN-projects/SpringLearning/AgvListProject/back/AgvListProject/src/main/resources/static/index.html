@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGV List</title>
+  <style>
+    .title {
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1.5px solid #ccc;
+      text-align: center;
+      padding: 6px;
+    }
+
+    th {
+      background-color: #f2e2e2;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1 class="title">AGV List</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>EName</th>
+          <th>Sn</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>NavType</th>
+          <th>UpdateTime</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr v-for="agv in agvList">
+          <td>{{agv.id}}</td>
+          <td>{{agv.enName}}</td>
+          <td>{{agv.sn}}</td>
+          <td>{{agv.name}}</td>
+          <td>{{agv.type}}</td>
+          <td>{{agv.navType}}</td>
+          <td>{{agv.updateTime}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <script src="js/axios.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module">
+    // import { createApp } from './js/vue.esm-browser.js'
+    import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
+
+    createApp({
+      data() {
+        return {
+          agvList: []
+        }
+      },
+      methods: {
+        async search() {
+          const result = await axios.get("/list");
+          this.agvList = result.data;
+        }
+      },
+      mounted() {
+        this.search();
+      }
+    }).mount("#app")
+  </script>
+</body>
+
+</html>
