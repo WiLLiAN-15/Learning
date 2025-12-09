@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: springboot-quickstart
+  #数据库的连接信息
+  datasource:
+    url: jdbc:mysql://localhost:3306/learningagv
+    username: root
+    password: root
+
+#Mybatis的相关配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
