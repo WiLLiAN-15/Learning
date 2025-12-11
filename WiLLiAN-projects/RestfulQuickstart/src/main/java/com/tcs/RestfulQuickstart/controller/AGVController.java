@@ -15,17 +15,32 @@ public class AGVController {
   private AGVService agvService;
 
   /**
-   * check All AGVs
-   * @return
+   * check all AGVs or one by id
+   * @param id AGV id
+   * @return result
    */
 //  @RequestMapping(value = "/AGVS", method = RequestMethod.GET)
   @GetMapping("/AGVS")
-  public Result list() {
-    System.out.println("Check All AGVs");
-    List<AGVResponse> agvList = agvService.checkAGVs();
-    return Result.success(agvList);
+  public Result list(@RequestParam(required = false) Integer id) {
+
+    if (id == null) {
+      System.out.println("Check All AGVs");
+      List<AGVResponse> agvList = agvService.checkAGVs();
+      return Result.success(agvList);
+    }
+    else {
+      System.out.println("Check AGV ID: " + id);
+      List<AGVResponse> agv = agvService.CheckAGVByID(id);
+      return Result.success(agv);
+    }
+
   }
 
+  /**
+   * delete AGV by ID
+   * @param id AGV id
+   * @return result
+   */
   @DeleteMapping("/AGVS")
   public Result delete(Integer id) {
     System.out.println("Delete by ID: " + id);
@@ -33,10 +48,29 @@ public class AGVController {
     return Result.success();
   }
 
+  /**
+   * insert new AGV
+   * @param name AGV name
+   * @return result
+   */
   @PostMapping("/AGVS")
   public Result insert(String name) {
     System.out.println("Insert AGV: " + name);
     agvService.insertAGV(name);
     return Result.success();
   }
+
+  /**
+   * change AGV Name
+   * @param id AGV id
+   * @param name AGV new name
+   * @return result
+   */
+  @PutMapping("/AGVS")
+  public Result update(Integer id, String name) {
+    System.out.println("Update AGV ID: " + id + ", New Name: " + name);
+    agvService.updateAGVByID(id, name);
+    return Result.success();
+  }
+
 }

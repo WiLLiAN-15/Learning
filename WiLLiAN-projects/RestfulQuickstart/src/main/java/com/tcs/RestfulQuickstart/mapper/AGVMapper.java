@@ -17,7 +17,13 @@ public interface AGVMapper {
   @Delete("DELETE FROM temp02 WHERE id = #{id}")
   void deleteByID(Integer id);
 
-  @Insert("insert into db01.temp02 (e_name, create_time, update_time) values (#{name}, now(), now())")
+  @Insert("insert into temp02 (e_name, create_time, update_time) values (#{name}, now(), now())")
   void insertAGV(String name);
+
+  @Select("select * from temp02 where id = #{id}")
+  AGV findByID(Integer id);
+
+  @Update("update temp02 set e_name = #{name} where id = #{id}")
+  void updateByID(Integer id, String name);
 
 }

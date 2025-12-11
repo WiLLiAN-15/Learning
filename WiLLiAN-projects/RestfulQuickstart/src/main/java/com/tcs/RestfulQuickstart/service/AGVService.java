@@ -13,4 +13,9 @@ public interface AGVService {
   void deleteByID(Integer id);
 
   void insertAGV(String name);
+
+  List<AGVResponse> CheckAGVByID(Integer id);
+
+  void updateAGVByID(Integer id, String name);
+
 }

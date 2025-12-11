@@ -37,5 +37,17 @@ public class AGVServiceImpl implements AGVService {
     agvMapper.insertAGV(name);
   }
 
+  @Override
+  public List<AGVResponse> CheckAGVByID(Integer id) {
+    AGV agv = agvMapper.findByID(id);
+    AGVResponse agvResponse = new AGVResponse(agv);
+    return List.of(agvResponse);
+  }
+
+  @Override
+  public void updateAGVByID(Integer id, String name) {
+    agvMapper.updateByID(id, name);
+  }
+
 
 }
