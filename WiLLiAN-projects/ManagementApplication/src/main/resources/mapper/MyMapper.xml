@@ -1,11 +1,29 @@
 <mapper namespace="com.tcs.ManagementApplication.mapper.MyMapper">
 
-  <select id="findAllEmployee" resultType="Employee">
+  <select id="findAllEmployee" resultType="com.tcs.ManagementApplication.pojo.Employee">
     select * from emp
   </select>
 
-  <select id="findAllDepartment" resultType="Department">
+  <select id="findAllDepartment" resultType="com.tcs.ManagementApplication.pojo.Department">
     select * from dept
   </select>
+
+  <delete id="deleteDeptByID">
+    delete from dept where id = #{id}
+  </delete>
+
+  <insert id="addDept">
+    insert into dept
+    (name, create_time, update_time)
+    values (#{name}, now(), now())
+  </insert>
+
+  <select id="getDeptByID" resultType="com.tcs.ManagementApplication.pojo.Department">
+    select * from dept where id = #{id}
+  </select>
+
+  <update id="changeDeptName">
+    update dept set name = #{name} where id = #{id}
+  </update>
 
 </mapper>

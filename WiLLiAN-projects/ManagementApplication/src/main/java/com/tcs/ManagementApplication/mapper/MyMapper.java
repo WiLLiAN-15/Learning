@@ -11,4 +11,12 @@ public interface MyMapper {
   List<Employee> findAllEmployee();
 
   List<Department> findAllDepartment();
+
+  void deleteDeptByID(int id);
+
+  void addDept(String name);
+
+  List<Department> getDeptByID(int id);
+
+  void changeDeptName(@Param("id") int id, @Param("name") String name);
 }
