@@ -25,21 +25,21 @@ public class MyServiceImpl implements MyService{
 
   @Override
   public void deleteDeptByID(int id) {
-
+    myMapper.deleteDeptByID(id);
   }
 
   @Override
   public void addDept(String name) {
-
+    myMapper.addDept(name);
   }
 
   @Override
   public List<Department> getDeptByID(int id) {
-    return List.of();
+    return myMapper.getDeptByID(id);
   }
 
   @Override
   public void changeDeptName(int id, String name) {
-
+    myMapper.changeDeptName(id, name);
   }
 }
