@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Department {
-
   private int id;
   private String name;
   private LocalDateTime createTime;
