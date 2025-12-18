@@ -1,13 +1,10 @@
 package com.tcs.ManagementApplication.service;
 
 import com.tcs.ManagementApplication.pojo.Department;
-import com.tcs.ManagementApplication.pojo.Employee;
 
 import java.util.List;
 
-public interface MyService {
-  List<Employee> findAllEmployee();
-
+public interface DeptService {
   List<Department> findAllDepartment();
 
   void deleteDeptByID(int id);

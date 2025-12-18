@@ -2,7 +2,7 @@ package com.tcs.ManagementApplication.controller;
 
 import com.tcs.ManagementApplication.pojo.Department;
 import com.tcs.ManagementApplication.pojo.Result;
-import com.tcs.ManagementApplication.service.MyServiceImpl;
+import com.tcs.ManagementApplication.service.impl.MyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

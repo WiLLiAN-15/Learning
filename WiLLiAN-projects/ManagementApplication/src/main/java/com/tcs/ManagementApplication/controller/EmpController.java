@@ -3,7 +3,7 @@ package com.tcs.ManagementApplication.controller;
 import com.tcs.ManagementApplication.pojo.DTO.AddEmpsRequest;
 import com.tcs.ManagementApplication.pojo.Employee;
 import com.tcs.ManagementApplication.pojo.Result;
-import com.tcs.ManagementApplication.service.MyService;
+import com.tcs.ManagementApplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,14 @@ import java.util.List;
 @RequestMapping("/emps")
 public class EmpController {
   @Autowired
-  public MyService myService;
+  private EmpService myService;
 
   @GetMapping
   public Result getEmpsByQuery(
       String name,
       int gender,
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate begin,
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
+      LocalDate begin,
+      LocalDate end,
       int page,
       int pageSize
       ) {
@@ -37,8 +37,26 @@ public class EmpController {
   }
 
   @PostMapping
-  public Result addEmps(@RequestBody AddEmpsRequest request) {
-    myService.addEmps(request);
+  public Result addEmp(@RequestBody AddEmpsRequest request) {
+    myService.addEmp(request);
     return Result.success();
+  }
+
+  @GetMapping("/{id}")
+  public Result getEmpByID(@PathVariable int id) {
+    Employee result = myService.getEmpByID(id);
+    return Result.success(result);
+  }
+
+  @PutMapping
+  public Result modifyEmp(@RequestBody Employee emp) {
+    myService.modifyEmp(emp);
+    return Result.success();
+  }
+
+  @GetMapping("/list")
+  public Result getAllEmps() {
+    List<Employee> result = myService.findAllEmployee();
+    return Result.success(result);
   }
 }
