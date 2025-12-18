@@ -1,6 +1,7 @@
 package com.tcs.ManagementApplication.controller;
 
-import com.tcs.ManagementApplication.pojo.DTO.AddEmpsRequest;
+import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
+import com.tcs.ManagementApplication.pojo.DTO.EmpResponse;
 import com.tcs.ManagementApplication.pojo.Employee;
 import com.tcs.ManagementApplication.pojo.Result;
 import com.tcs.ManagementApplication.service.EmpService;
@@ -36,19 +37,19 @@ public class EmpController {
   }
 
   @PostMapping
-  public Result addEmp(@RequestBody AddEmpsRequest request) {
+  public Result addEmp(@RequestBody EmpRequest request) {
     myService.addEmp(request);
     return Result.success();
   }
 
   @GetMapping("/{id}")
   public Result getEmpByID(@PathVariable Integer id) {
-    Employee result = myService.getEmpByID(id);
+    EmpResponse result = myService.getEmpByID(id);
     return Result.success(result);
   }
 
   @PutMapping
-  public Result modifyEmp(@RequestBody Employee emp) {
+  public Result modifyEmp(@RequestBody EmpRequest emp) {
     myService.modifyEmp(emp);
     return Result.success();
   }

@@ -19,4 +19,11 @@ public interface EmpMapper {
    */
   void deleteEmpsByID(List<Integer> ids);
 
+  /**
+   * Select an Emp
+   * @param id
+   * @return
+   */
+  Employee getEmpByID(Integer id);
+
 }

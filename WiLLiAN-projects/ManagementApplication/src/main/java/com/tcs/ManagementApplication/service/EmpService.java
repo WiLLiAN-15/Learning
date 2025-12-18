@@ -1,6 +1,7 @@
 package com.tcs.ManagementApplication.service;
 
-import com.tcs.ManagementApplication.pojo.DTO.AddEmpsRequest;
+import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
+import com.tcs.ManagementApplication.pojo.DTO.EmpResponse;
 import com.tcs.ManagementApplication.pojo.Employee;
 
 import java.time.LocalDate;
@@ -15,9 +16,9 @@ public interface EmpService {
 
   void deleteEmpsByID(List<Integer> ids);
 
-  void addEmp(AddEmpsRequest request);
+  void addEmp(EmpRequest request);
 
-  Employee getEmpByID(Integer id);
+  EmpResponse getEmpByID(Integer id);
 
-  void modifyEmp(Employee emp);
+  void modifyEmp(EmpRequest request);
 }

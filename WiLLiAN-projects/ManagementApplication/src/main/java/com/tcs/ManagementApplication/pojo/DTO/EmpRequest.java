@@ -1,9 +1,10 @@
 package com.tcs.ManagementApplication.pojo.DTO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
-public record AddEmpsRequest(
+public record EmpRequest(
   String image,
   String username,
   String name,
@@ -12,6 +13,7 @@ public record AddEmpsRequest(
   LocalDate entryDate,
   Integer deptId,
   String phone,
-  Integer salary
+  Integer salary,
+  List<ExprResponse> exprList
 ) {}
 

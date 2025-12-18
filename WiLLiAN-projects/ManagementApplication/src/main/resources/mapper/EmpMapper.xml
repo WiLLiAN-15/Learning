@@ -4,12 +4,23 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tcs.ManagementApplication.mapper.EmpMapper">
-  <delete id="deleteEmpsByID">
-
+  <delete id="deleteEmpsByID" parameterType="list">
+    delete
+    from dept
+    where id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
   </delete>
 
   <select id="findAllEmployee" resultType="com.tcs.ManagementApplication.pojo.Employee">
     select * from emp
+  </select>
+
+  <select id="getEmpByID" resultType="com.tcs.ManagementApplication.pojo.Employee" parameterType="integer">
+    select *
+    from emp
+    where id = #{id}
   </select>
 
 
