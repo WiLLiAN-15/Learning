@@ -9,15 +9,15 @@ import java.util.List;
 public interface EmpService {
   List<Employee> findAllEmployee();
 
-  List<Employee> getEmpsByQuery(String name, int gender,
+  List<Employee> getEmpsByQuery(String name, Integer gender,
                                 LocalDate begin, LocalDate end,
-                                int page, int pageSize);
+                                Integer page, Integer pageSize);
 
   void deleteEmpsByID(List<Integer> ids);
 
   void addEmp(AddEmpsRequest request);
 
-  Employee getEmpByID(int id);
+  Employee getEmpByID(Integer id);
 
   void modifyEmp(Employee emp);
 }

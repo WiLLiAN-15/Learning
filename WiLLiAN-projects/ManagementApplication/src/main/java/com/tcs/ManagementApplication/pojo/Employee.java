@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-  private int id;
+  private Integer id;
   private String username;
   private String password;
   private String name;
-  private int gender;
+  private Integer gender;
   private String phone;
-  private int job;
-  private int salary;
+  private Integer job;
+  private Integer salary;
   private String image;
   private LocalDateTime entryDate;
-  private int deptId;
+  private Integer deptId;
   private LocalDateTime createTime;
   private LocalDateTime updateTime;
 }

@@ -3,7 +3,7 @@ package com.tcs.ManagementApplication.pojo.DTO;
 import java.time.LocalDate;
 
 
-public record PastJob(
+public record Expr(
   String company,
   String job,
   LocalDate begin,

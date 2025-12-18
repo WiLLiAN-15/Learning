@@ -2,7 +2,7 @@ package com.tcs.ManagementApplication.controller;
 
 import com.tcs.ManagementApplication.pojo.Department;
 import com.tcs.ManagementApplication.pojo.Result;
-import com.tcs.ManagementApplication.service.impl.MyServiceImpl;
+import com.tcs.ManagementApplication.service.impl.DeptServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/depts")
 public class DeptController {
   @Autowired
-  private MyServiceImpl myService;
+  private DeptServiceImpl myService;
 
   @GetMapping
   public Result getAllDept() {
@@ -21,7 +21,7 @@ public class DeptController {
   }
 
   @DeleteMapping
-  public Result deleteDeptByID(int id) {
+  public Result deleteDeptByID(Integer id) {
     myService.deleteDeptByID(id);
     return Result.success();
   }
@@ -33,13 +33,13 @@ public class DeptController {
   }
 
   @GetMapping("/{id}")
-  public Result getDeptByID(@PathVariable int id) {
+  public Result getDeptByID(@PathVariable Integer id) {
     List<Department> result = myService.getDeptByID(id);
     return Result.success(result);
   }
 
   @PutMapping()
-  public Result changeDeptName(int id, String name) {
+  public Result changeDeptName(Integer id, String name) {
     myService.changeDeptName(id, name);
     return Result.success();
   }

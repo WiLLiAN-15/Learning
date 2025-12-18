@@ -7,11 +7,11 @@ public record AddEmpsRequest(
   String image,
   String username,
   String name,
-  int gender,
-  int job,
+  Integer gender,
+  Integer job,
   LocalDate entryDate,
-  int deptId,
+  Integer deptId,
   String phone,
-  int salary
+  Integer salary
 ) {}
 
