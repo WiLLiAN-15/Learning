@@ -1,7 +1,7 @@
-package com.tcs.RestfulQuickstart.service;
+package com.tcs.RCS.service;
 
-import com.tcs.RestfulQuickstart.pojo.AGV;
-import com.tcs.RestfulQuickstart.pojo.AGVResponse;
+import com.tcs.RCS.pojo.AGV;
+import com.tcs.RCS.pojo.AGVResponse;
 
 import java.util.List;
 

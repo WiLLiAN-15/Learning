@@ -1,11 +1,13 @@
-package com.tcs.RestfulQuickstart.service.impl;
+package com.tcs.RCS.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.tcs.RestfulQuickstart.mapper.EmpMapper;
-import com.tcs.RestfulQuickstart.pojo.Emp;
-import com.tcs.RestfulQuickstart.pojo.PageResult;
-import com.tcs.RestfulQuickstart.service.EmpService;
+import com.tcs.RCS.mapper.EmpExprMapper;
+import com.tcs.RCS.mapper.EmpMapper;
+import com.tcs.RCS.pojo.Emp;
+import com.tcs.RCS.pojo.EmpExpr;
+import com.tcs.RCS.pojo.PageResult;
+import com.tcs.RCS.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ import java.util.List;
 public class EmpServiceImpl implements EmpService {
   @Autowired
   private EmpMapper empMapper;
+
+  @Autowired
+  private EmpExprMapper empExprMapper;
 
   @Override
   public PageResult<Emp> page(Integer page, Integer pageSize) {
@@ -32,5 +37,27 @@ public class EmpServiceImpl implements EmpService {
     List<Emp> empList = empMapper.listPageHelper();
     Page<Emp> p = (Page<Emp>) empList;
     return new PageResult<>(p.getTotal(), p.getResult());
+  }
+
+  @Override
+  public void save(Emp emp) {
+    empMapper.insert(emp);
+
+    Integer empId = emp.getId();
+    List<EmpExpr> exprList = emp.getExprList();
+    if(!exprList.isEmpty()) {
+      exprList.forEach(empExpr -> empExpr.setEmpId(empId));
+      empExprMapper.insertBatch(exprList);
+    }
+  }
+
+  @Override
+  public void change(Integer id, String phone) {
+    empMapper.update(id, phone);
+  }
+
+  @Override
+  public void deleteByIds(List<Integer> ids) {
+    empMapper.deleteByIds(ids);
   }
 }

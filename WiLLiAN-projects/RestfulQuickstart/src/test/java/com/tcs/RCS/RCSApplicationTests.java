@@ -1,10 +1,10 @@
-package com.tcs.RestfulQuickstart;
+package com.tcs.RCS;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestfulQuickstartApplicationTests {
+class RCSApplicationTests {
 
 	@Test
 	void contextLoads() {

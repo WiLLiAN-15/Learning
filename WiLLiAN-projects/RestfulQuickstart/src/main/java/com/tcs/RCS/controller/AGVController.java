@@ -1,8 +1,8 @@
-package com.tcs.RestfulQuickstart.controller;
+package com.tcs.RCS.controller;
 
-import com.tcs.RestfulQuickstart.pojo.AGVResponse;
-import com.tcs.RestfulQuickstart.pojo.Result;
-import com.tcs.RestfulQuickstart.service.AGVService;
+import com.tcs.RCS.pojo.AGVResponse;
+import com.tcs.RCS.pojo.Result;
+import com.tcs.RCS.service.AGVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

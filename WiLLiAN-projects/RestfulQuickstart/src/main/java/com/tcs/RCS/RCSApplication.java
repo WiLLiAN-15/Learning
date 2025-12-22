@@ -1,13 +1,13 @@
-package com.tcs.RestfulQuickstart;
+package com.tcs.RCS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestfulQuickstartApplication {
+public class RCSApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestfulQuickstartApplication.class, args);
+		SpringApplication.run(RCSApplication.class, args);
 	}
 
 }

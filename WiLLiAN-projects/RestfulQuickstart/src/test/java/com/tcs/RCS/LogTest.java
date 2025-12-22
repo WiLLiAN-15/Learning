@@ -1,4 +1,4 @@
-package com.tcs.RestfulQuickstart;
+package com.tcs.RCS;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

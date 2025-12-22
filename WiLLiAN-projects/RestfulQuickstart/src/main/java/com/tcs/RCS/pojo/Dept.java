@@ -1,4 +1,4 @@
-package com.tcs.RestfulQuickstart.pojo;
+package com.tcs.RCS.pojo;
 
 import lombok.Data;
 

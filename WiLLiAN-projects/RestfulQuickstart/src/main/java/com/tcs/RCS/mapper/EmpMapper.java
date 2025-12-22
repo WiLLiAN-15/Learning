@@ -1,6 +1,6 @@
-package com.tcs.RestfulQuickstart.mapper;
+package com.tcs.RCS.mapper;
 
-import com.tcs.RestfulQuickstart.pojo.Emp;
+import com.tcs.RCS.pojo.Emp;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -24,4 +24,15 @@ public interface EmpMapper {
 //   */
 //  @Select("SELECT count(*) FROM emp LEFT JOIN dept ON emp.dept_id = dept.id")
 //  Long count();
+
+  @Options(useGeneratedKeys = true, keyProperty = "id")
+  @Insert("INSERT INTO emp(username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time, password)\n" +
+      "VALUES(#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime}, #{password})")
+  void insert(Emp emp);
+
+  void deleteByIds(List<Integer> ids);
+
+  @Update("UPDATE emp SET phone = #{phone} WHERE id = #{id}")
+  void update(@Param("id") Integer id,
+              @Param("phone") String phone);
 }

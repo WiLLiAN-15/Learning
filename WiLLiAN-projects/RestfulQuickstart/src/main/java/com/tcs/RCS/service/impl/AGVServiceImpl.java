@@ -1,9 +1,9 @@
-package com.tcs.RestfulQuickstart.service.impl;
+package com.tcs.RCS.service.impl;
 
-import com.tcs.RestfulQuickstart.mapper.AGVMapper;
-import com.tcs.RestfulQuickstart.pojo.AGV;
-import com.tcs.RestfulQuickstart.pojo.AGVResponse;
-import com.tcs.RestfulQuickstart.service.AGVService;
+import com.tcs.RCS.mapper.AGVMapper;
+import com.tcs.RCS.pojo.AGV;
+import com.tcs.RCS.pojo.AGVResponse;
+import com.tcs.RCS.service.AGVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

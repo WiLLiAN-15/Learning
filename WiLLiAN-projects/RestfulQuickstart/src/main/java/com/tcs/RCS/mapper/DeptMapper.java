@@ -1,6 +1,6 @@
-package com.tcs.RestfulQuickstart.mapper;
+package com.tcs.RCS.mapper;
 
-import com.tcs.RestfulQuickstart.pojo.Dept;
+import com.tcs.RCS.pojo.Dept;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
