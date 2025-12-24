@@ -29,9 +29,6 @@ public class EmpController {
 
   @PostMapping
   public Result save(@RequestBody Emp emp) {
-    emp.setCreateTime(LocalDateTime.now());
-    emp.setUpdateTime(LocalDateTime.now());
-    emp.setPassword("123456");
     log.info("Request Parm emp: {}", emp);
 
     empService.save(emp);
