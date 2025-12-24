@@ -23,5 +23,27 @@
     where id = #{id}
   </select>
 
+  <select id="selectEmp" resultType="com.tcs.ManagementApplication.pojo.Employee">
+    select *
+    from emp
+    where 1 = 1
+    <if test="name != null and name != ''">
+      and name like #{name}
+    </if>
+    <if test="gender != null">
+      and gender = #{gender}
+    </if>
+    <if test="begin != null">
+      <![CDATA[
+        and entry_date >= #{begin}
+      ]]>
+    </if>
+    <if test="end != null">
+      <![CDATA[
+        and entry_date <= #{end}
+      ]]>
+    </if>
+  </select>
+
 
 </mapper>

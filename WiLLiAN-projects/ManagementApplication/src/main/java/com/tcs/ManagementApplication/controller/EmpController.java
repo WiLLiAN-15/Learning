@@ -1,5 +1,6 @@
 package com.tcs.ManagementApplication.controller;
 
+import com.tcs.ManagementApplication.pojo.DTO.EmpQuery;
 import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
 import com.tcs.ManagementApplication.pojo.DTO.EmpResponse;
 import com.tcs.ManagementApplication.pojo.Employee;
@@ -8,7 +9,6 @@ import com.tcs.ManagementApplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,15 +18,8 @@ public class EmpController {
   private EmpService myService;
 
   @GetMapping
-  public Result getEmpsByQuery(
-      String name,
-      Integer gender,
-      LocalDate begin,
-      LocalDate end,
-      Integer page,
-      Integer pageSize
-      ) {
-    List<Employee> result = myService.getEmpsByQuery(name, gender, begin, end, page, pageSize);
+  public Result getEmpsByQuery(EmpQuery query) {
+    List<Employee> result = myService.getEmpsByQuery(query);
     return Result.success(result);
   }
 

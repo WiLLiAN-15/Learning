@@ -1,5 +1,6 @@
 package com.tcs.ManagementApplication.pojo;
 
+import com.tcs.ManagementApplication.pojo.DTO.EmpQuery;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
