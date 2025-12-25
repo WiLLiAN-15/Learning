@@ -1,11 +1,11 @@
 package com.tcs.ManagementApplication.service;
 
+import com.tcs.ManagementApplication.pojo.DTO.EmpFullRequest;
 import com.tcs.ManagementApplication.pojo.DTO.EmpQuery;
 import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
 import com.tcs.ManagementApplication.pojo.DTO.EmpResponse;
 import com.tcs.ManagementApplication.pojo.Employee;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface EmpService {
@@ -19,5 +19,5 @@ public interface EmpService {
 
   EmpResponse getEmpByID(Integer id);
 
-  void modifyEmp(EmpRequest request);
+  void modifyEmp(EmpFullRequest request);
 }

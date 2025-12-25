@@ -4,9 +4,32 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tcs.ManagementApplication.mapper.EmpMapper">
+  <insert id="insertEmp" useGeneratedKeys="true" keyProperty="id">
+    insert into emp
+    (username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)
+    values
+    (#{username}, #{password}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, now(), now())
+  </insert>
+
+  <update id="update">
+    update emp
+    set
+      username     = #{username},
+      password     = #{password},
+      name         = #{name},
+      gender       = #{gender},
+      image        = #{image},
+      job          = #{job},
+      salary       = #{salary},
+      entry_date   = #{entryDate},
+      dept_id      = #{deptId},
+      update_time  = now()
+    where id = #{id}
+  </update>
+
   <delete id="deleteEmpsByID" parameterType="list">
     delete
-    from dept
+    from emp
     where id in
     <foreach collection="ids" item="id" open="(" separator="," close=")">
       #{id}

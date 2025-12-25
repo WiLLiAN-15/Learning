@@ -1,10 +1,11 @@
 package com.tcs.ManagementApplication.pojo;
 
-import com.tcs.ManagementApplication.pojo.DTO.EmpQuery;
+import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,8 +21,21 @@ public class Employee {
   private Integer job;
   private Integer salary;
   private String image;
-  private LocalDateTime entryDate;
+  private LocalDate entryDate;
   private Integer deptId;
   private LocalDateTime createTime;
   private LocalDateTime updateTime;
+
+  public Employee(EmpRequest req) {
+    username = req.username();
+    name = req.name();
+    gender = req.gender();
+    phone = req.phone();
+    job = req.job();
+    salary = req.salary();
+    image = req.image();
+    entryDate = req.entryDate();
+    deptId = req.deptId();
+  }
+
 }

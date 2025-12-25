@@ -1,5 +1,6 @@
 package com.tcs.ManagementApplication.controller;
 
+import com.tcs.ManagementApplication.pojo.DTO.EmpFullRequest;
 import com.tcs.ManagementApplication.pojo.DTO.EmpQuery;
 import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
 import com.tcs.ManagementApplication.pojo.DTO.EmpResponse;
@@ -24,7 +25,7 @@ public class EmpController {
   }
 
   @DeleteMapping
-  public Result deleteEmpsByID(List<Integer> ids) {
+  public Result deleteEmpsByID(@RequestParam List<Integer> ids) {
     myService.deleteEmpsByID(ids);
     return Result.success();
   }
@@ -42,7 +43,7 @@ public class EmpController {
   }
 
   @PutMapping
-  public Result modifyEmp(@RequestBody EmpRequest emp) {
+  public Result modifyEmp(@RequestBody EmpFullRequest emp) {
     myService.modifyEmp(emp);
     return Result.success();
   }

@@ -3,6 +3,7 @@ package com.tcs.ManagementApplication.pojo.DTO;
 import com.tcs.ManagementApplication.pojo.Employee;
 import com.tcs.ManagementApplication.pojo.Expr;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public record EmpResponse(
     Integer job,
     Integer salary,
     String image,
-    LocalDateTime entryDate,
+    LocalDate entryDate,
     Integer deptId,
     LocalDateTime createTime,
     LocalDateTime updateTime,

@@ -14,6 +14,6 @@ public record EmpRequest(
   Integer deptId,
   String phone,
   Integer salary,
-  List<ExprResponse> exprList
+  List<ExprDTO> exprList
 ) {}
 
