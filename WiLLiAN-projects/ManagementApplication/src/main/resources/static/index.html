@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Employee List</title>
+  <style>
+    .title {
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1.5px solid #ccc;
+      text-align: center;
+      padding: 6px;
+    }
+
+    th {
+      background-color: #f2e2e2;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h1 class="title">Employee List</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>UserName</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Job</th>
+      <th>Salary</th>
+      <th>DeptId</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr v-for="emp in emps" :key="emp.id">
+      <td>{{emp.id}}</td>
+      <td>{{emp.username}}</td>
+      <td>{{emp.name}}</td>
+      <td>{{emp.gender}}</td>
+      <td>{{emp.job}}</td>
+      <td>{{emp.salary}}</td>
+      <td>{{emp.deptId}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button @click="prevPage" :disabled="currentPage === 1">前へ</button>
+    <span>ページ {{ currentPage }} / {{ maxPage }}</span>
+    <button @click="nextPage" :disabled="currentPage === maxPage">次へ</button>
+  </div>
+</div>
+
+<script type="module">
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        emps: [],
+        currentPage: 1,
+        pageSize: 10,
+        total: 0
+      };
+    },
+    computed: {
+      maxPage() {
+        return Math.ceil(this.total / this.pageSize) || 1;
+      }
+    },
+    methods: {
+      loadEmps() {
+        fetch(`/emps?page=${this.currentPage}&pageSize=${this.pageSize}`)
+          .then(res => res.json())
+          .then(res => {
+            if (res.code !== 1) {
+              alert(res.msg || 'エラーが発生しました');
+              return;
+            }
+            this.emps = res.data.rows;
+            this.total = res.data.total;
+          })
+          .catch(err => {
+            console.error(err);
+            alert("データ取得に失敗しました");
+          });
+      },
+      prevPage() {
+        if (this.currentPage > 1) {
+          this.currentPage--;
+          this.loadEmps();
+        }
+      },
+      nextPage() {
+        if (this.currentPage < this.maxPage) {
+          this.currentPage++;
+          this.loadEmps();
+        }
+      }
+    },
+    mounted() {
+      this.loadEmps();
+    }
+  }).mount("#app");
+</script>
+
+</body>
+
+</html>

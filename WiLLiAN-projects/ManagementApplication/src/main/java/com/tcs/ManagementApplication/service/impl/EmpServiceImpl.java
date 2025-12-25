@@ -7,6 +7,7 @@ import com.tcs.ManagementApplication.mapper.ExprMapper;
 import com.tcs.ManagementApplication.pojo.DTO.*;
 import com.tcs.ManagementApplication.pojo.Employee;
 import com.tcs.ManagementApplication.pojo.Expr;
+import com.tcs.ManagementApplication.pojo.PageResult;
 import com.tcs.ManagementApplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,13 @@ public class EmpServiceImpl implements EmpService {
   }
 
   @Override
-  public List<Employee> getEmpsByQuery(EmpQuery query) {
+  public PageResult getEmpsByQuery(EmpQuery query) {
     PageHelper.startPage(query.page(), query.pageSize());
 
     List<Employee> lst = empMapper.selectEmp(query.name(), query.gender(), query.begin(), query.end());
     Page<Employee> p = (Page<Employee>) lst;
 
-    return p.getResult();
+    return new PageResult(p.getTotal(), p.getResult());
   }
 
   @Transactional(rollbackFor = {Exception.class})
