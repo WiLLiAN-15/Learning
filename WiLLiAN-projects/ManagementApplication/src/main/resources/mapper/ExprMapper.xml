@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tcs.ManagementApplication.mapper.ExprMapper">
+  <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+    insert into expr
+    (emp_id, begin_date, end_date, company, job)
+    values
+    <foreach collection="exprList" item="expr" separator=",">
+      (#{expr.empId}, #{expr.begin}, #{expr.end}, #{expr.company}, #{expr.job})
+    </foreach>
+  </insert>
+
+  <update id="updateBatch">
+    <foreach collection="exprList" item="e" separator=";">
+      update expr
+      set
+        company = #{e.company},
+        job = #{e.job},
+        begin_date = #{e.begin},
+        end_date = #{e.end},
+        emp_id = #{e.empId}
+      where id = #{e.id}
+    </foreach>
+  </update>
+
+  <delete id="delete" parameterType="list">
+    delete from expr
+    where emp_id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+  <delete id="deleteByEmpId">
+    delete from expr
+    where emp_id = #{id}
+  </delete>
+
+  <select id="getExprByID" resultType="com.tcs.ManagementApplication.pojo.Expr">
+    select *
+    from emp_expr
+    where emp_id = #{id}
+  </select>
+</mapper>

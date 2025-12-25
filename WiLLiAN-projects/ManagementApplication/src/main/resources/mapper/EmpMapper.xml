@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tcs.ManagementApplication.mapper.EmpMapper">
+  <insert id="insertEmp" useGeneratedKeys="true" keyProperty="id">
+    insert into emp
+    (username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)
+    values
+    (#{username}, #{password}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, now(), now())
+  </insert>
+
+  <update id="update">
+    update emp
+    set
+      username     = #{username},
+      password     = #{password},
+      name         = #{name},
+      gender       = #{gender},
+      image        = #{image},
+      job          = #{job},
+      salary       = #{salary},
+      entry_date   = #{entryDate},
+      dept_id      = #{deptId},
+      update_time  = now()
+    where id = #{id}
+  </update>
+
+  <delete id="deleteEmpsByID" parameterType="list">
+    delete
+    from emp
+    where id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <select id="findAllEmployee" resultType="com.tcs.ManagementApplication.pojo.Employee">
+    select * from emp
+  </select>
+
+  <select id="getEmpByID" resultType="com.tcs.ManagementApplication.pojo.Employee" parameterType="integer">
+    select *
+    from emp
+    where id = #{id}
+  </select>
+
+  <select id="selectEmp" resultType="com.tcs.ManagementApplication.pojo.Employee">
+    select *
+    from emp
+    where 1 = 1
+    <if test="name != null and name != ''">
+      and name like #{name}
+    </if>
+    <if test="gender != null">
+      and gender = #{gender}
+    </if>
+    <if test="begin != null">
+      <![CDATA[
+        and entry_date >= #{begin}
+      ]]>
+    </if>
+    <if test="end != null">
+      <![CDATA[
+        and entry_date <= #{end}
+      ]]>
+    </if>
+  </select>
+
+
+</mapper>
