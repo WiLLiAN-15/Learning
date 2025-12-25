@@ -5,12 +5,14 @@ import com.tcs.ManagementApplication.pojo.DTO.EmpQuery;
 import com.tcs.ManagementApplication.pojo.DTO.EmpRequest;
 import com.tcs.ManagementApplication.pojo.DTO.EmpResponse;
 import com.tcs.ManagementApplication.pojo.Employee;
+import com.tcs.ManagementApplication.pojo.PageResult;
 import com.tcs.ManagementApplication.pojo.Result;
 import com.tcs.ManagementApplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/emps")
@@ -20,7 +22,7 @@ public class EmpController {
 
   @GetMapping
   public Result getEmpsByQuery(EmpQuery query) {
-    List<Employee> result = myService.getEmpsByQuery(query);
+    PageResult result = myService.getEmpsByQuery(query);
     return Result.success(result);
   }
 
