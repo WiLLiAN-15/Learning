@@ -68,7 +68,7 @@
       <th>Gender</th>
       <th>Job</th>
       <th>Salary</th>
-      <th>DeptId</th>
+      <th>Dept</th>
     </tr>
     </thead>
 
@@ -77,10 +77,10 @@
       <td>{{emp.id}}</td>
       <td>{{emp.username}}</td>
       <td>{{emp.name}}</td>
-      <td>{{emp.gender}}</td>
+      <td>{{ genderMap[emp.gender] }}</td>
       <td>{{emp.job}}</td>
       <td>{{emp.salary}}</td>
-      <td>{{emp.deptId}}</td>
+      <td>{{ deptMap[emp.deptId] }}</td>
     </tr>
     </tbody>
   </table>
@@ -93,10 +93,52 @@
   </div>
 </div>
 
+<script setup>
+  const genderMap = {
+    1: "男",
+    2: "女"
+  }
+
+  const deptMap = {
+    1: "工程部",
+    2: "人事部",
+    3: "咨询部",
+    4: "财务部",
+    5: "行政部",
+    6: "法务部",
+    7: "市场部",
+    8: "销售部",
+    9: "研发部"
+  }
+</script>
+
 <script type="module">
   const { createApp } = Vue;
 
   createApp({
+    setup() {
+      const genderMap = {
+          1: '男',
+          2: '女'
+      }
+
+      const deptMap = {
+          1: '工程部',
+          2: '人事部',
+          3: '咨询部',
+          4: '财务部',
+          5: '行政部',
+          6: '法务部',
+          7: '市场部',
+          8: '销售部',
+          9: '研发部'
+      }
+
+      return {
+        genderMap,
+        deptMap
+      }
+    },
     data() {
       return {
         emps: [],
